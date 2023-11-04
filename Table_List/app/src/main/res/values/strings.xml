@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Table_List</string>
+    <string name="add_table">테이블 추가하기</string>
+    <string name="delete_table">삭제</string>
+    <string name="title">Table</string>
+    <string name="hint_title">Table 이름을 입력해주세요.</string>
+    <!-- 메뉴추가 -->
+    <string name="completion">완료</string>
+
+</resources>
