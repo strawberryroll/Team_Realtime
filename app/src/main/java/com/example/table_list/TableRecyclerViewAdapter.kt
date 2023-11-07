@@ -18,7 +18,7 @@ class TableRecyclerViewAdapter(private val tableList: ArrayList<TableEntity>,
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        // item_todo.xml 바인딩 객체 생성
+        // item_table.xml 바인딩 객체 생성
         val binding: ItemTableBinding =
             ItemTableBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MyViewHolder(binding)
