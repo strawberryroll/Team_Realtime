@@ -6,11 +6,18 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Intent
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.table_list.databinding.ActivityMainBinding
 import com.example.table_list.db.AppDatabase
 import com.example.table_list.db.TableDao
 import com.example.table_list.db.TableEntity
+import android.widget.Button
+import android.widget.Toolbar
+import android.widget.Toolbar.OnMenuItemClickListener
+
 
 class MainActivity : AppCompatActivity(), OnItemLongClickListener {
 
@@ -26,16 +33,40 @@ class MainActivity : AppCompatActivity(), OnItemLongClickListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         binding.btnAdd.setOnClickListener {
             val intent = Intent(this, AddTableActivity::class.java)
             startActivity(intent)
         }
 
+        binding.toolbar.title = "Realtime"
+        binding.toolbar.inflateMenu(R.menu.main_menu)
+
         db = AppDatabase.getInstance(this)!!
         tableDao = db.getTableDao()
 
         getAllTableList()
+
+        binding.toolbar.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.action_btn2 -> {
+                    val intent = Intent(this, ProductActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+                R.id.action_btn1 -> {
+                    false
+                }
+                else -> {
+                    false
+                }
+            }
+
+        }
+
     }
+
+
 
     private fun getAllTableList(){
         Thread{
@@ -83,5 +114,29 @@ class MainActivity : AppCompatActivity(), OnItemLongClickListener {
         }.start()
     }
 
+    /*
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+    */
+
+
+
+
+/*
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle presses on the action bar items
+        when(item.itemId){
+            R.id.action_btn1 -> { return super.onOptionsItemSelected(item) }
+            R.id.action_btn2 -> { return super.onOptionsItemSelected(item) }
+            else -> {return super.onOptionsItemSelected(item)}
+
+
+
+        }
+    }
+*/
 
 }
+
