@@ -1,22 +1,16 @@
 package com.example.table_list
 
 import android.content.DialogInterface
+import android.content.Intent
+import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.content.Intent
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.table_list.databinding.ActivityMainBinding
 import com.example.table_list.db.AppDatabase
 import com.example.table_list.db.TableDao
 import com.example.table_list.db.TableEntity
-import android.widget.Button
-import android.widget.Toolbar
-import android.widget.Toolbar.OnMenuItemClickListener
 
 
 class MainActivity : AppCompatActivity(), OnItemLongClickListener {
@@ -32,6 +26,7 @@ class MainActivity : AppCompatActivity(), OnItemLongClickListener {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
 
 
         binding.btnAdd.setOnClickListener {
