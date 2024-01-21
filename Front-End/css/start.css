@@ -1,0 +1,37 @@
+@charset "utf-8";
+
+.login_btn
+{
+    width: 16rem;
+    height: 4rem;
+    margin: 1rem;
+    background-color: #618264;
+    color: white;
+    border: none;
+    border-radius: 5rem;
+    font-size: 1.7rem;
+    box-shadow: 0.2rem 0.2rem 0.4rem 0 rgba(0,0,0,0.2);
+}
+.login_btn:hover{
+    background-color: #D0E7D2;
+    color: #618264;
+    transition: 0.5s;
+}
+
+.register_btn
+{
+    width: 16rem;
+    height: 4rem;
+    margin: 1rem;
+    background-color: #618264;
+    color: white;
+    border: none;
+    border-radius: 5rem;
+    font-size: 1.7rem;
+    box-shadow: 0.2rem 0.2rem 0.4rem 0 rgba(0,0,0,0.2);
+}
+.register_btn:hover{
+    background-color: #D0E7D2;
+    color: #618264;
+    transition: 0.5s;
+}
