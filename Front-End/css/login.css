@@ -19,17 +19,39 @@
     transition: 0.5s;
 }
 
-.form_input
-{
+.form_input {
     border-width: 0.1rem;
     border-radius: 5rem;
     margin: 0.5rem;
     padding-left: 1rem;
-    width: 15rem;
-    height: 2rem;
+    width: 16rem;
+    height: 3rem;
     font-size: 1rem;
+    border-style:solid;
+    border-color:#618264;
+    
 }
 .form_input input
+{
+    border-width: 1px;
+}
+
+.form_input_combobox{
+    border-width: 0.1rem;
+    border-radius: 5rem;
+    margin: 0.5rem;
+    padding-left: 1rem;
+    width: 16rem;
+    height: 3rem;
+    font-size: 1rem;
+    border-style:solid;
+    border-color:#618264;
+    appearance: none;
+    background: url(icon/arrow-down.png) no-repeat right 9px center;
+    background-size: 20px;
+    
+}
+.form_input_combobox input
 {
     border-width: 1px;
 }
@@ -70,6 +92,21 @@
     width: 50%;
     text-align: center;
 }
+
+select:required:invalid{
+    color: gray;
+}
+
+option {
+    color: black;
+}
+
+.subtitle{
+    padding-bottom: 7px;
+    text-align: center;
+
+}
+
 
 
 .register_btn
