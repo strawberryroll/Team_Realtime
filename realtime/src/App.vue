@@ -3,7 +3,9 @@
   <!--사이드바-->
   <section id="sidebar">
     <div class ="logo">Real<br>Time</div>
-
+    <div class ="sidebar-hide">
+      <font-awesome-icon :icon="['far', 'window-minimize']" style="color: #1e1e1e;" />
+    </div>
     <ul class="side-top">
       <a href="#">
           <span class="text">Section 01</span>
@@ -143,6 +145,14 @@ li{
     font-weight: 500;
 }
 /*사이드바*/
+.sidebar-hide{
+  position: absolute;
+  top:0;
+  right:0; 
+  padding-right: 20px;
+  padding-top: 10px;
+  font-size: 18px;
+}
 #sidebar{
   position: relative;
   top: 0;
@@ -221,7 +231,7 @@ li{
   position:fixed;
   width: calc(100% - 280px);
   top: 0;
-  height: 68px;
+  height: 58px;
   left: 281px;
   background: var(--cream-white);
 
@@ -230,7 +240,7 @@ li{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  margin-top: 10px;
   background: var(--cream-white);
 }
 .arrow-btn{
@@ -246,6 +256,9 @@ li{
 .arrow-btn:hover{
   background-color: var(--darkgrey);
   transition: 0.5s; 
+}
+.nav-left{
+  margin-left: 16px;
 }
 .nav-right{
   display: flex;
