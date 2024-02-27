@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RealTime POS : 회원가입</title>
+    <link rel="stylesheet" href = "https://unpkg.com/ress/dist/ress.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+    <div class="container">
+        <div class="left_frame">
+            <a href=""><h1 class="title">RealTime <br>POS</h1></a>
+        </div>
+        <form action="register_profile" method="POST" name="register_profile_form" class="right_frame">
+            <h3 class="subtitle">Profile Registration</h3>
+            <!--상호명-->
+            <input name="company_name" type="text" placeholder="상호명" class="form_input">
+            <!--업종-->
+            <select name="company_type" class="form_input_combobox" required>
+                <option value="" disabled selected>업종</option>
+                <option value="rest_stop">휴게음식점영업</option>   
+                <option value="restaurant">일반음식점영업</option>
+                <option value="karaoke_bar">단란주점영업</option>   
+                <option value="bakery">제과점영업</option>
+                <option value="catering">위탁급식영업</option>
+                <option value="other">기타</option>   
+            </select>   
+            <!--국가-->
+            <select name="country" class="form_input_combobox" required>
+                <option value="" disabled selected>국가</option>
+                <option value="kr">대한민국</option> 
+                <option value="us">미국</option> 
+                <option value="in">인도</option> 
+                <option value="jp">일본</option>
+                <option value="cn">중국</option>  
+                <option value="other">기타</option>   
+            </select>
+            <button type="submit" class="login_btn">설정 완료!</button>
+        </form>
+    </div>
+</body>
+</html>

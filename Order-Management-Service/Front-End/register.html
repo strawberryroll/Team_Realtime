@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RealTime POS : 회원가입</title>
+    <link rel="stylesheet" href = "https://unpkg.com/ress/dist/ress.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+    <div class="container">
+        <div class="left_frame">
+            <a href=""><h1 class="title">RealTime <br>POS</h1></a>
+        </div>
+        <form action="register" method="POST" name="register_form" class="right_frame">
+            <h3 class="subtitle">Welcome!</h3>
+            <!--아이디-->
+            <input name="id" type="text" placeholder="아이디" class="form_input" maxlength="20">
+            <!--비밀번호-->
+            <input name="password" type="password" placeholder="비밀번호" class="form_input" maxlength="16">
+            <!--이름-->
+            <input name="user_name" type="text" placeholder="이름" class="form_input">
+            <!--전화번호-->
+            <input name="phone" type="number" placeholder="전화번호" class="form_input">
+
+            <button type="submit" class="login_btn">계정 만들기</button>
+        </form>
+    </div>
+</body>
+</html>
