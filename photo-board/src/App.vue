@@ -5,7 +5,7 @@
 
 
    <!--NAVBAR 헤더-->
-  <section id="navbar">
+  <section>
     <nav class="navbar">
       <div class="nav-left">
         <button class="arrow-btn">
@@ -78,6 +78,7 @@ html,body{
 #app{
   height: 100%;
   width: 100%;
+  display: flex;
 }
 *{
   background-color: #F5F5F7;
@@ -191,22 +192,19 @@ li{
   font-weight: 550;
 }
 /*navbar*/
-#navbar{
+.navbar{
   position:fixed;
   width: calc(100% - 89px);
   top: 0;
-  height: 58px;
+  height: 65px;
   left: 89px;
   background: var(--cream-white);
-
-}
-#navbar .navbar{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 10px;
   background: var(--cream-white);
 }
+
 .arrow-btn{
   background: white;
   color: var(--black);
@@ -233,7 +231,8 @@ li{
 }
 /*main-content*/
 #main-content{
-  
+  display: flex;
+  flex: 1;
 }
 
 </style>

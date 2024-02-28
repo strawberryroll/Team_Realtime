@@ -39,7 +39,6 @@ export default {
 <style>
 /* My Profile */
 .container {
-  position: absolute;
   display: flex;
   align-items: center;
   background-color: #F5F5F7;
@@ -51,11 +50,11 @@ export default {
   vertical-align: middle;
   left: 10%;
   right: 0;
-  margin: auto;
   width: 80%;
   height: 70%;
   background: white;
   padding: 40px;
+  margin-top: 60px;
   border-radius: 10px;
 }
 .box-title {
@@ -71,10 +70,12 @@ export default {
   padding-top: 40px;
   width: 100%;  
   height: 70%;
+  background: transparent;
 }
 .profile-img {
   position: absolute;
   top: 80px;
+  background: transparent;
 }
 .content {
     position: absolute;
