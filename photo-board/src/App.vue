@@ -4,9 +4,8 @@
   <Sidebar @isOpen="toggleSidebar" :user_name="user_name" :isOpen="isOpen"/>
 
 
-  <!--메인-->
-  <section id="main-content">
-    <!--NAVBAR 헤더-->
+   <!--NAVBAR 헤더-->
+  <section id="navbar">
     <nav class="navbar">
       <div class="nav-left">
         <button class="arrow-btn">
@@ -16,7 +15,6 @@
           <font-awesome-icon :icon="['fas', 'chevron-right']" style="color: #212121;" />
         </button>
       </div>
-
       <div class="nav-right">
           <font-awesome-icon :icon="['fas', 'plus']" style="color: #1e1e1e;" />
           <font-awesome-icon :icon="['fas', 'trash-can']" style="color: #1e1e1e;" />
@@ -24,6 +22,12 @@
       </div>
     </nav>
   </section>
+
+  <!--main content-->
+  <section id="main-content">
+    <router-view></router-view>
+  </section>
+
   
 
 
@@ -186,8 +190,8 @@ li{
 .menu-sub-title{
   font-weight: 550;
 }
-/*메인*/
-#main-content{
+/*navbar*/
+#navbar{
   position:fixed;
   width: calc(100% - 89px);
   top: 0;
@@ -196,7 +200,7 @@ li{
   background: var(--cream-white);
 
 }
-#main-content .navbar{
+#navbar .navbar{
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -226,6 +230,10 @@ li{
   font-size: 18px;
   width: 100px;
   margin-right: 20px;
+}
+/*main-content*/
+#main-content{
+  
 }
 
 </style>

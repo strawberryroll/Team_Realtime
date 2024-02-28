@@ -24,9 +24,9 @@
         </a>
       </li>
       <li>
-        <a href="#">
+        <router-link to="/myprofile">
           <div class="text">My Profile</div>
-        </a>
+        </router-link>
       </li>
       <li>
         <a href="#">
@@ -38,7 +38,6 @@
           <div class="text">About</div>
         </a>
       </li>
-      
     </ul>
 
     <div class="share-btn">
@@ -60,6 +59,7 @@
       </div>
     </div>
   </section>
+  
 
 </template>
 
