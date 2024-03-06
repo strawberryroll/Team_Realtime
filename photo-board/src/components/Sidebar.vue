@@ -19,9 +19,9 @@
     <div class="menu-sub-title">Menu</div>
     <ul class="side-mid">
       <li>
-        <a href="#">
+        <router-link to="/home">
           <div class="text">Home</div>
-        </a>
+        </router-link>
       </li>
       <li>
         <router-link to="/myprofile">
@@ -29,14 +29,14 @@
         </router-link>
       </li>
       <li>
-        <a href="#">
-          <div class="text">Guest book</div>
-        </a>
+        <router-link to="/guestbook">
+          <div class="text">Guest Book</div>
+        </router-link>
       </li>
       <li>
-        <a href="#">
+        <router-link to="/about">
           <div class="text">About</div>
-        </a>
+        </router-link>
       </li>
     </ul>
 

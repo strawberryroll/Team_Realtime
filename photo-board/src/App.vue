@@ -3,41 +3,20 @@
   <!--사이드바-->
   <Sidebar @isOpen="toggleSidebar" :user_name="user_name" :isOpen="isOpen"/>
 
-
    <!--NAVBAR 헤더-->
-  <section>
-    <nav class="navbar">
-      <div class="nav-left">
-        <button class="arrow-btn">
-          <font-awesome-icon :icon="['fas', 'chevron-left']" style="color: #212121;" />
-        </button>
-        <button class="arrow-btn">
-          <font-awesome-icon :icon="['fas', 'chevron-right']" style="color: #212121;" />
-        </button>
-      </div>
-      <div class="nav-right">
-          <font-awesome-icon :icon="['fas', 'plus']" style="color: #1e1e1e;" />
-          <font-awesome-icon :icon="['fas', 'trash-can']" style="color: #1e1e1e;" />
-          <font-awesome-icon :icon="['fas', 'pen-to-square']" style="color: #1e1e1e;" />
-      </div>
-    </nav>
-  </section>
+  <Header/>
 
   <!--main content-->
   <section id="main-content">
     <router-view></router-view>
   </section>
 
-  
-
-
-
-
 </template>
 
 <script>
 // components
 import Sidebar from './components/Sidebar.vue';
+import Header from './components/Header.vue';
 
 export default {
   data(){
@@ -48,6 +27,7 @@ export default {
   },
   components:{
     Sidebar,
+    Header,
   },
   methods:{
     toggleSidebar(){
@@ -233,6 +213,121 @@ li{
 #main-content{
   display: flex;
   flex: 1;
+}
+/* Home */
+.home-container {
+  display: flex;
+  align-items: center; 
+  width: 100%;
+  height: 100%;
+}
+.home-white-box {
+  position: absolute;
+  vertical-align: middle;
+  left: 10%;
+  right: 0;
+  width: 80%;
+  height: 70%;
+  padding: 40px;
+  margin-top: 60px;
+  border-radius: 10px;
+}
+
+/* My Profile */
+.container {
+  display: flex;
+  align-items: center;
+  background-color: #F5F5F7;
+  width: 100%;
+  height: 100%;
+}
+.white-box {
+  position: absolute;
+  vertical-align: middle;
+  left: 10%;
+  right: 0;
+  width: 80%;
+  height: 70%;
+  background: white;
+  padding: 40px;
+  margin-top: 60px;
+  border-radius: 10px;
+}
+.box-title {
+  position: absolute;
+  top: 10px;
+  font-size: 30px;
+}
+.division-line {
+  border-top: 1px solid #dcdfe3;
+  margin-top: 55px; 
+}
+.box-content {
+  padding-top: 40px;
+  width: 100%;  
+  height: 70%;
+  background: transparent;
+}
+.profile-img {
+  position: absolute;
+  top: 80px;
+  background: transparent;
+}
+.content {
+    position: absolute;
+    top: 120px;
+}
+
+.content-name {
+    left: 600px;
+}
+
+.content-email {
+    left: 900px;
+}
+
+.content-phone {
+    left: 600px;
+    top: 250px;
+}
+
+.content-about {
+    left: 600px;
+    top: 380px;
+}
+input {
+    width: 200px;
+    height: 30px;;
+    font-size: 15px;
+    border: 0;
+    border-bottom: 1.5px solid #D3D3D3;
+}
+textarea {
+    width: 520px;
+    height: 100px;
+    font-size: 15px;
+    border: 0;
+    background-color: #F5F5F7;
+    border-radius: 10px;
+    padding: 15px 0 0 20px;
+}
+.myprofile-btn {
+    position: absolute;
+    top: 410px;
+    left: 350px;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: 0;
+    background-color: white;
+    background-image: url("./assets/icon/camera.png");
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+.myprofile-btn:hover {
+  opacity: 0.7; 
 }
 
 </style>
