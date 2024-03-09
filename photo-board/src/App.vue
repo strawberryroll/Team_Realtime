@@ -32,8 +32,7 @@ export default {
   methods:{
     toggleSidebar(){
       this.isOpen = !this.isOpen;
-    }
-    
+    },
   }
 
 }
@@ -61,7 +60,6 @@ html,body{
   display: flex;
 }
 *{
-  background-color: #F5F5F7;
   font-family: "DM Sans", sans-serif;
   padding: 0;
 }
@@ -213,6 +211,7 @@ li{
 #main-content{
   display: flex;
   flex: 1;
+  background-color: #F5F5F7;
 }
 /* Home */
 .home-container {

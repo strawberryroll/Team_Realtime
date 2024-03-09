@@ -19,7 +19,7 @@
     <div class="menu-sub-title">Menu</div>
     <ul class="side-mid">
       <li>
-        <router-link to="/home">
+        <router-link to="/">
           <div class="text">Home</div>
         </router-link>
       </li>
