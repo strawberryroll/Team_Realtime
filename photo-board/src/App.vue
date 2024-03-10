@@ -74,7 +74,7 @@ li{
     font-style: italic;
     font-weight: 500;
 }
-/*사이드바*/
+/*사이드바-닫힘*/
 #sidebar.hide{
   width: 47px;
 }
@@ -84,9 +84,22 @@ li{
 #sidebar.hide .share-btn,
 #sidebar.hide .logout-icon {
   visibility: hidden;
-  transition: all 0.1s;
+  transition: all 0s;
 }
-
+#sidebar.hide .side-top{
+  transform: rotate(-90deg);
+  margin: 0;
+  width: 200px;
+  height: 173px;
+  margin-top: -25px;
+}
+#sidebar.hide .user-info{
+  transform: rotate(-90deg);
+}
+#sidebar.hide .user-name{
+  padding-left: 15px;
+}
+/*사이드바-열림*/
 #sidebar{
   position: relative;
   top: 0;
@@ -98,10 +111,10 @@ li{
   background: white;
   overflow: hidden;
   z-index: 100;
-  transition: all 0.5s;
   border-right-style: solid;
   border-right-width: 1px;
   border-color: var(--shadow);
+  transition: 0.5s;
 }
 
 #sidebar a {
@@ -112,7 +125,7 @@ li{
   position: absolute;
   top:0;
   right:0; 
-  padding-right: 20px;
+  padding-right: 33px;
   padding-top: 10px;
   font-size: 18px;
 }
