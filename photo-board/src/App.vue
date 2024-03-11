@@ -244,7 +244,54 @@ li{
   margin-top: 60px;
   border-radius: 10px;
 }
-
+.home-imgBox {
+    width: 40%;
+    height: 50%;
+    border-radius: 15px;
+    overflow: hidden; /* 부모 요소를 기준으로 자식 요소가 넘치지 않도록 설정 */
+}
+.home-imgBox-img {
+    width: 45%;
+    height: 100%;
+    background: #EFEFF0;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    float: left; /* float 속성으로 가로정렬 */
+}
+.home-imgBox-content {
+    width: 55%; 
+    height: 100%;
+    padding: 60px 40px; 
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background: white;
+    float: left;
+    box-sizing: border-box; /* padding 값이 요소의 너비에 포함되도록 box-sizing 설정 */
+}
+.clear { 
+    clear: both; /* float 다음에 오는 박스들이 제자리를 찾게 됨 */
+    float: none; /* 나중에 생길 버그예방차원 */
+}
+.margin-0 {
+    margin: 0;
+}
+.font-20 {
+    font-size: 20px;
+}
+.font-13 {
+    font-size: 13px;
+}
+.font-bold {
+    font-weight: bold;
+}
+.font-semi-bold {
+    font-weight: 600;
+}
+.center-align {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 /* My Profile */
 .container {
   display: flex;
@@ -289,7 +336,6 @@ li{
     position: absolute;
     top: 120px;
 }
-
 .content-name {
     left: 600px;
 }
