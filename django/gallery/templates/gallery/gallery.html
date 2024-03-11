@@ -1,0 +1,27 @@
+<!-- templates/gallery/gallery.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Photo Gallery</title>
+</head>
+<body>
+    <h1>Photo Gallery</h1>
+    <a href="{% url 'photo_upload' %}">사진 업로드</a>
+    <br><br><br>
+    {% if photos %}
+        <div>
+            {% for photo in photos %}
+                <div>
+                    <h3>{{ photo.title }}</h3>
+                    <img src="{{ photo.image.url }}" alt="{{ photo.title }}">
+                    <p>{{ photo.description }}</p>
+                    <a href="{% url 'photo_delete' pk=photo.pk %}">사진 삭제</a>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>사진이 없습니다.</p>
+    {% endif %}
+</body>
+</html>

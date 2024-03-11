@@ -1,0 +1,17 @@
+<!-- templates/gallery/photo_confirm_delete.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Photo</title>
+</head>
+<body>
+    <h1>Delete Photo</h1>
+    <p>"{{ object.title }}"을 삭제할래?</p>
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" value="응">
+    </form>
+    <a href="{% url 'photo_gallery' %}"><button type="button">아니</button></a>
+</body>
+</html>
