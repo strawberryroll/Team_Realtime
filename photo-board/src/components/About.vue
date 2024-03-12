@@ -5,8 +5,13 @@
         <div class="division-line"></div>
         <div id="content" class="about-box-content">
             <div class="about-text">
+<<<<<<< Updated upstream
                 <div class="about-text-1">제작</div>
                 <div class="about-text-2">Team RealTime</div>
+=======
+                <div class="about-text1">제작</div>
+                <div class="about-text2">Team RealTime</div>
+>>>>>>> Stashed changes
             </div>
             <div class="about-icon">
                 <router-link to="/git" target="_blank">
@@ -34,6 +39,7 @@ export default {
   height: 70%;
   display: flex;
   flex-direction: column;
+<<<<<<< Updated upstream
   align-items: center;
   justify-content: center;
 }
@@ -50,6 +56,17 @@ export default {
   font-weight: 800;
   margin-top: 5px;
   font-size: 31px;
+=======
+  align-content: center;
+  justify-content: center;
+}
+
+.about-text1{
+  text-align: justify
+}
+.about-text2{
+  text-align: justify
+>>>>>>> Stashed changes
 }
 .about-icon{
   display: flex;
