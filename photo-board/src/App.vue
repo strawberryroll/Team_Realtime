@@ -296,7 +296,6 @@ li{
 .container {
   display: flex;
   align-items: center;
-  background-color: #F5F5F7;
   width: 100%;
   height: 100%;
 }
@@ -325,12 +324,24 @@ li{
   padding-top: 40px;
   width: 100%;  
   height: 70%;
-  background: transparent;
+  background: transparent; /* 해당 요소의 배경투명 */
 }
-.profile-img {
+.box-content-circle {
+  position: relative;
+  width: 28%;
+  height: 90%;
+  border-radius: 50%;
+  background: #EFEFEF;
+  margin-top: 30px;
+  margin-left: 70px;
+  overflow: hidden;
+}
+.box-content-person {
   position: absolute;
-  top: 80px;
-  background: transparent;
+  color: #C4C4C4;
+  font-size: 8em; 
+  left: 33%;
+  top: 28%;
 }
 .content {
     position: absolute;
@@ -339,16 +350,13 @@ li{
 .content-name {
     left: 600px;
 }
-
 .content-email {
     left: 900px;
 }
-
 .content-phone {
     left: 600px;
     top: 250px;
 }
-
 .content-about {
     left: 600px;
     top: 380px;
@@ -371,17 +379,17 @@ textarea {
 }
 .myprofile-btn {
     position: absolute;
+    height: 70px;
+    width: 70px;
     top: 410px;
     left: 350px;
-    height: 50px;
-    width: 50px;
     border-radius: 50%;
     border: 0;
     background-color: white;
-    background-image: url("./assets/icon/camera.png");
-    background-size: 60%;
-    background-repeat: no-repeat;
-    background-position: center;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M149.1 64.8L138.7 96H64C28.7 96 0 124.7 0 160V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V160c0-35.3-28.7-64-64-64H373.3L362.9 64.8C356.4 45.2 338.1 32 317.4 32H194.6c-20.7 0-39 13.2-45.5 32.8zM256 192a96 96 0 1 1 0 192 96 96 0 1 1 0-192z"/></svg>');
+    background-size: 40%;
+    background-repeat: no-repeat; /* 배경 이미지 반복 제거 */
+    background-position: center; /* 배경 이미지 위치를 가운데로 설정 */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 .myprofile-btn:hover {
