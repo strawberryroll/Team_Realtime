@@ -68,7 +68,7 @@ export default {
   data() {
     return {
       isOpen: false, // 사이드바 오픈 여부
-      M_isOpen: true, // 모달창 오픈 여부
+      M_isOpen: false, // 모달창 오픈 여부
       user_name: "User_Name",
     };
   },
@@ -348,7 +348,6 @@ li {
 .container {
   display: flex;
   align-items: center;
-  background-color: #f5f5f7;
   width: 100%;
   height: 100%;
 }
@@ -371,73 +370,82 @@ li {
 }
 .division-line {
   border-top: 1px solid #dcdfe3;
-  margin-top: 55px;
+  margin-top: 55px; 
 }
 .box-content {
   padding-top: 40px;
-  width: 100%;
+  width: 100%;  
   height: 70%;
-  background: transparent;
+  background: transparent; /* 해당 요소의 배경투명 */
 }
-.profile-img {
+.box-content-circle {
+  position: relative;
+  width: 28%;
+  height: 90%;
+  border-radius: 50%;
+  background: #EFEFEF;
+  margin-top: 30px;
+  margin-left: 70px;
+  overflow: hidden;
+}
+.box-content-person {
   position: absolute;
-  top: 80px;
-  background: transparent;
+  color: #C4C4C4;
+  font-size: 8em; 
+  left: 33%;
+  top: 28%;
 }
 .content {
-  position: absolute;
-  top: 120px;
+    position: absolute;
+    top: 120px;
 }
 .content-name {
-  left: 600px;
+    left: 600px;
 }
-
 .content-email {
-  left: 900px;
+    left: 900px;
 }
-
 .content-phone {
-  left: 600px;
-  top: 250px;
+    left: 600px;
+    top: 250px;
 }
-
 .content-about {
-  left: 600px;
-  top: 380px;
+    left: 600px;
+    top: 380px;
 }
 input {
-  width: 200px;
-  height: 30px;
-  font-size: 15px;
-  border: 0;
-  border-bottom: 1.5px solid #d3d3d3;
+    width: 200px;
+    height: 30px;;
+    font-size: 15px;
+    border: 0;
+    border-bottom: 1.5px solid #D3D3D3;
 }
 textarea {
-  width: 520px;
-  height: 100px;
-  font-size: 15px;
-  border: 0;
-  background-color: #f5f5f7;
-  border-radius: 10px;
-  padding: 15px 0 0 20px;
+    width: 520px;
+    height: 100px;
+    font-size: 15px;
+    border: 0;
+    background-color: #F5F5F7;
+    border-radius: 10px;
+    padding: 15px 0 0 20px;
 }
 .myprofile-btn {
-  position: absolute;
-  top: 410px;
-  left: 350px;
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
-  border: 0;
-  background-color: white;
-  background-image: url("./assets/icon/camera.png");
-  background-size: 60%;
-  background-repeat: no-repeat;
-  background-position: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    height: 70px;
+    width: 70px;
+    top: 410px;
+    left: 350px;
+    border-radius: 50%;
+    border: 0;
+    background-color: white;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M149.1 64.8L138.7 96H64C28.7 96 0 124.7 0 160V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V160c0-35.3-28.7-64-64-64H373.3L362.9 64.8C356.4 45.2 338.1 32 317.4 32H194.6c-20.7 0-39 13.2-45.5 32.8zM256 192a96 96 0 1 1 0 192 96 96 0 1 1 0-192z"/></svg>');
+    background-size: 40%;
+    background-repeat: no-repeat; /* 배경 이미지 반복 제거 */
+    background-position: center; /* 배경 이미지 위치를 가운데로 설정 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 .myprofile-btn:hover {
-  opacity: 0.7;
+  opacity: 0.7; 
 }
 
 /* Modal window */
@@ -451,7 +459,7 @@ textarea {
 .modal-white-box {
   position: absolute;
   vertical-align: middle;
-  left: 16%;
+  left: 14%;
   right: 0;
   width: 65%;
   height: 68%;
@@ -503,8 +511,8 @@ textarea {
   margin-left: 20px;
 }
 #modal-textarea {
-  width: 600px;
-  height: 225px;
+  width: 540px;
+  height: 184px;
   font-size: 15px;
   border: 0;
   background-color: #f5f5f7;
@@ -518,6 +526,7 @@ textarea {
 }
 .modal-comment {
   padding: 30px;
+  width: 400px;
 }
 .upload-btn {
   font-size: 19px;
@@ -527,7 +536,7 @@ textarea {
   background-color: transparent;
   border: 0;
   text-align: right;
-  margin-top: 9px;
+  margin-top: 5px;
 }
 .upload-btn:hover {
   color: #1e1e1e;
