@@ -5,11 +5,13 @@ import MyProfile from '../components/MyProfile.vue';
 import Home from '../components/Home.vue';
 import GuestBook from '../components/GuestBook.vue';
 import About from '../components/About.vue';
+import PhotoData from "@/PhotoData";
 
 const routes = [
   {
     path: '/',
     component: Home,
+    props: {PhotoData:PhotoData}
   },
   {
     path: '/myprofile',
