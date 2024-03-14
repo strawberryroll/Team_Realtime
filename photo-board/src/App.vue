@@ -1,11 +1,11 @@
 <template>
-  <!--사이드바-->
+  <!-- Sidebar -->
   <Sidebar @isOpen="toggleSidebar" :user_name="user_name" :isOpen="isOpen" />
 
-  <!--NAVBAR 헤더-->
+  <!-- NAVBAR Header -->
   <Header :M_isOpen="M_isOpen" @M_isOpen="toggleModal" />
 
-  <!--main content-->
+  <!-- main content -->
   <section id="main-content">
     <router-view></router-view>
   </section>
@@ -26,15 +26,21 @@
         <div class="division-line"></div>
         <!-- modal content-->
         <div class="modal-content">
+          <!--Left part-->
           <div class="modal-L">
-            <div class="modal-imgBox-img center-align">
+            <!--photo preview-->
+            <div v-if="photo_url" class="modal-imgBox-img center-align">
+              <img :src="photo_url" style="width: 100%; height: auto;">
+            </div>
+            <div v-else class="modal-imgBox-img center-align">
               <font-awesome-icon
                 :icon="['fas', 'image']"
-                style="color: #c4c4c4; font-size: 4em"
-              />
+                style="color: #c4c4c4; font-size: 4em"/>
             </div>
-            <input type="file" class="file-btn" />
+            <!--/photo preview-->
+            <input type="file" accept="image/*" class="file-btn" @change="upload" />
           </div>
+          <!--Right part-->
           <div class="modal-R">
             <div class="modal-title">
               <p>Title</p>
@@ -57,6 +63,8 @@
       </div>
     </div>
   </Transition>
+ <!-- /Modal Window -->
+
 </template>
 
 <script>
@@ -70,6 +78,7 @@ export default {
       isOpen: false, // 사이드바 오픈 여부
       M_isOpen: false, // 모달창 오픈 여부
       user_name: "User_Name",
+      photo_url:'', // 업로드 할 사진의 url
     };
   },
   components: {
@@ -82,6 +91,12 @@ export default {
     },
     toggleModal() {
       this.M_isOpen = !this.M_isOpen;
+    },
+    upload(e){
+      let photo = e.target.files;
+      let url = URL.createObjectURL(photo[0]);
+      console.log(url);
+      this.photo_url = url;
     },
   },
 };
@@ -455,6 +470,7 @@ textarea {
   background: rgba(38, 38, 38, 0.9);
   position: fixed;
   padding: 20px;
+  z-index: 1000;
 }
 .modal-white-box {
   position: absolute;
