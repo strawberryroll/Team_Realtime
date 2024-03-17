@@ -7,7 +7,7 @@
 
   <!-- main content -->
   <section id="main-content">
-    <router-view></router-view>
+    <router-view :key="key"></router-view>
   </section>
   <!-- Modal Window -->
   <Transition name="modal">
@@ -82,6 +82,7 @@ import Header from "./components/Header.vue";
 export default {
   data() {
     return {
+      key:0,
       isOpen: false, // 사이드바 오픈 여부
       M_isOpen: false, // 모달창 오픈 여부
       user_name: "User_Name",
@@ -89,6 +90,7 @@ export default {
       PhotoData: PhotoData, // 업로드 사진에 대한 정보
       photo_comment:"",
       photo_title:"",
+      photo_date:"",
     };
   },
   components: {
@@ -113,17 +115,18 @@ export default {
       const year = currentDate.getFullYear();
       const month = String(currentDate.getMonth() + 1).padStart(2, "0"); // 월은 0부터 시작하므로 +1 해줌
       const day = String(currentDate.getDate()).padStart(2, "0");
-      const formattedDate = `${year}-${month}-${day}`;
-      console.log(formattedDate);
+      this.photo_date = `${year}-${month}-${day}`;
     },
     PhotoUpload() { // 사용자가 입력한 사진 정보를 PhotoData.js에 저장하는 함수 
+      this.GetDate();
       let NewData = {
         title: this.photo_title,
         comment: this.photo_comment,
         url: this.photo_url,
-        date: this.GetDate,
+        date: this.photo_date,
       };
       this.PhotoData.unshift(NewData);
+      this.key++;
       this.toggleModal();
       
     },
