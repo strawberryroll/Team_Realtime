@@ -1,22 +1,26 @@
 <template>
-<PhotoCard :PhotoData="PhotoData" />
-
- 
+  <div class="home-container">
+    <div class="home-white-box">
+      <PhotoCard
+        :PhotoData="PhotoData"
+        v-for="(PhotoData, i) in PhotoData"
+        :key="i"
+      />
+    </div>
+  </div>
 </template>
 
 <script>
-import PhotoCard from './PhotoCard.vue'
+import PhotoCard from "./PhotoCard.vue";
 export default {
-  props:{
-    PhotoData:Array,
+  props: {
+    PhotoData: Array,
   },
-  components:{
+  components: {
     PhotoCard,
-  }
-  
-}
+  },
+};
 </script>
 
 <style>
-
 </style>

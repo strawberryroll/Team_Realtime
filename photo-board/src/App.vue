@@ -7,8 +7,9 @@
 
   <!-- main content -->
   <section id="main-content">
-    <router-view :key="key"></router-view>
+    <router-view :key="update_key"></router-view>
   </section>
+
   <!-- Modal Window -->
   <Transition name="modal">
     <div class="black-bg" v-if="M_isOpen == true">
@@ -82,7 +83,7 @@ import Header from "./components/Header.vue";
 export default {
   data() {
     return {
-      key:0,
+      update_key:0,
       isOpen: false, // 사이드바 오픈 여부
       M_isOpen: false, // 모달창 오픈 여부
       user_name: "User_Name",
@@ -126,7 +127,7 @@ export default {
         date: this.photo_date,
       };
       this.PhotoData.unshift(NewData);
-      this.key++;
+      this.update_key++;
       this.toggleModal();
       
     },
@@ -333,19 +334,29 @@ li {
   height: 100%;
 }
 .home-white-box {
-  position: absolute;
-  vertical-align: middle;
+  display: flex;
   left: 10%;
   right: 0;
-  width: 80%;
-  height: 70%;
-  padding: 40px;
-  margin-top: 60px;
+  width: 100%;
+  height: 75%;
   border-radius: 10px;
+  margin-left: 50px;
+  flex-wrap: wrap;
+  
+  /*
+  position: absolute;
+  vertical-align: middle;
+  padding: 40px;
+  margin-top: 60px;*/
+
+}
+.home-white-box > *{
+  flex: 0 0 calc(90% /3);
 }
 .home-imgBox {
   width: 40%;
   height: 50%;
+  margin: 12px;
   border-radius: 15px;
   overflow: hidden; /* 부모 요소를 기준으로 자식 요소가 넘치지 않도록 설정 */
 }
