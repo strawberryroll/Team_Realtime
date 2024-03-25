@@ -3,6 +3,7 @@
     <div class="home-white-box">
       <PhotoCard
         :PhotoData="PhotoData"
+        :showDeleteButton="showDeleteButton" 
         v-for="(PhotoData, i) in PhotoData"
         :key="i"
       />
@@ -15,6 +16,7 @@ import PhotoCard from "./PhotoCard.vue";
 export default {
   props: {
     PhotoData: Array,
+    showDeleteButton: Boolean,
   },
   components: {
     PhotoCard,

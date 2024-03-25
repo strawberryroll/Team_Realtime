@@ -6,4 +6,3 @@ export default [
         date: "2024-03-14",
     },
 ]
-

@@ -2,12 +2,12 @@
   <!-- Sidebar -->
   <Sidebar @isOpen="toggleSidebar" :user_name="user_name" :isOpen="isOpen" />
 
-  <!-- NAVBAR Header -->
-  <Header :M_isOpen="M_isOpen" @M_isOpen="toggleModal" />
+  <!-- NAVBAR Header --> 
+  <Header :M_isOpen="M_isOpen" @M_isOpen="toggleModal" @deletePhotocard="deletePhotoCard" @show_D_Btn="toggleDeleteButton" />
 
   <!-- main content -->
   <section id="main-content">
-    <router-view :key="update_key"></router-view>
+    <router-view :key="update_key" :showDeleteButton="showDeleteButton"></router-view>
   </section>
 
   <!-- Modal Window -->
@@ -92,6 +92,7 @@ export default {
       photo_comment:"",
       photo_title:"",
       photo_date:"",
+      showDeleteButton: false, // 삭제 버튼 보임 여부
     };
   },
   components: {
@@ -130,6 +131,9 @@ export default {
       this.update_key++;
       this.toggleModal();
       
+    },
+    toggleDeleteButton() { 
+      this.showDeleteButton = !this.showDeleteButton;
     },
   },
 };
@@ -341,14 +345,7 @@ li {
   height: 75%;
   border-radius: 10px;
   margin-left: 50px;
-  flex-wrap: wrap;
-  
-  /*
-  position: absolute;
-  vertical-align: middle;
-  padding: 40px;
-  margin-top: 60px;*/
-
+  flex-wrap: wrap; /* 요소들이 Flex 컨테이너 내에서 여러 줄에 걸쳐 자동으로 나열되도록 설정 */
 }
 .home-white-box > *{
   flex: 0 0 calc(90% /3);
@@ -359,6 +356,11 @@ li {
   margin: 12px;
   border-radius: 15px;
   overflow: hidden; /* 부모 요소를 기준으로 자식 요소가 넘치지 않도록 설정 */
+}
+.btn-delete-minus {
+  float: right;
+  margin-top: -48px;
+  margin-right: -25px;
 }
 .home-imgBox-img {
   width: 45%;
