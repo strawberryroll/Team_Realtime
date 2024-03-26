@@ -3,11 +3,11 @@
   <Sidebar @isOpen="toggleSidebar" :user_name="user_name" :isOpen="isOpen" />
 
   <!-- NAVBAR Header --> 
-  <Header :M_isOpen="M_isOpen" @M_isOpen="toggleModal" @deletePhotocard="deletePhotoCard" @show_D_Btn="toggleDeleteButton" />
+  <Header :M_isOpen="M_isOpen" @M_isOpen="toggleModal" @show_D_Btn="toggleDeleteButton" />
 
   <!-- main content -->
   <section id="main-content">
-    <router-view :key="update_key" :showDeleteButton="showDeleteButton"></router-view>
+    <router-view :key="update_key" :showDeleteButton="showDeleteButton" @deletePhotoCard="handleDeletePhotoCard"></router-view>
   </section>
 
   <!-- Modal Window -->
@@ -134,6 +134,10 @@ export default {
     },
     toggleDeleteButton() { 
       this.showDeleteButton = !this.showDeleteButton;
+    },
+    handleDeletePhotoCard(index) {
+      // 전달받은 인덱스를 이용하여 PhotoData.js에서 해당 데이터를 삭제합니다.
+      this.PhotoData.splice(index, 1);
     },
   },
 };
@@ -361,6 +365,9 @@ li {
   float: right;
   margin-top: -48px;
   margin-right: -25px;
+}
+.btn-delete-minus:hover {
+  box-shadow: 0px 0px 1px 1px rgb(0,0,0,0.1);
 }
 .home-imgBox-img {
   width: 45%;
