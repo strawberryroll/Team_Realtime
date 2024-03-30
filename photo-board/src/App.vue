@@ -1,22 +1,37 @@
 <template>
   <!-- Sidebar -->
-  <Sidebar @isOpen="toggleSidebar" :user_name="user_name" :isOpen="isOpen" />
+  <Sidebar :user_name="user_name" :isOpen="isOpen" @isOpen="toggleSidebar" />
 
-  <!-- NAVBAR Header --> 
-  <Header :M_isOpen="M_isOpen" @M_isOpen="toggleModal" @show_D_Btn="toggleDeleteButton" />
+  <!-- NAVBAR Header -->
+  <Header
+    :M_isOpen="M_isOpen"
+    @M_isOpen="toggleModal"
+    @show_D_Btn="toggleDeleteButton"
+    @show_E_Btn="toggleEditMode"
+  />
 
   <!-- main content -->
   <section id="main-content">
-    <router-view :key="update_key" :showDeleteButton="showDeleteButton" @deletePhotoCard="handleDeletePhotoCard"></router-view>
+    <router-view
+      :key="update_key"
+      :showDeleteButton="showDeleteButton"
+      :showEditButton="showEditButton"
+      @deletePhotoCard="handleDeletePhotoCard"
+      
+    >
+    </router-view>
   </section>
 
   <!-- Modal Window -->
-  <Modal 
-  @M_isOpen="toggleModal" @PhotoSelect="PhotoSelect" @PhotoUpload="PhotoUpload"
-  :M_isOpen="M_isOpen" :photo_url="photo_url" 
-  v-model:photo_title="photo_title" v-model:photo_comment="photo_comment"
+  <Modal
+    @M_isOpen="toggleModal"
+    @PhotoSelect="PhotoSelect"
+    @PhotoUpload="PhotoUpload"
+    :M_isOpen="M_isOpen"
+    :photo_url="photo_url"
+    v-model:photo_title="photo_title"
+    v-model:photo_comment="photo_comment"
   />
-
 </template>
 
 <script>
@@ -29,16 +44,17 @@ import Modal from "./components/Modal.vue";
 export default {
   data() {
     return {
-      update_key:0,
+      update_key: 0,
       isOpen: false, // 사이드바 오픈 여부
       M_isOpen: false, // 모달창 오픈 여부
       user_name: "User_Name",
       photo_url: "", // 업로드 할 사진의 url
       PhotoData: PhotoData, // 업로드 사진에 대한 정보
-      photo_comment:"",
-      photo_title:"",
-      photo_date:"",
+      photo_comment: "",
+      photo_title: "",
+      photo_date: "",
       showDeleteButton: false, // 삭제 버튼 보임 여부
+      showEditButton: true, // 포토카드의 오른쪽 상단에 수정 버튼 보임 여부
     };
   },
   components: {
@@ -54,7 +70,7 @@ export default {
       this.M_isOpen = !this.M_isOpen;
     },
     PhotoSelect(event) {
-      let photo =event.target.files;
+      let photo = event.target.files;
       let url = URL.createObjectURL(photo[0]);
       console.log(url);
       this.photo_url = url;
@@ -66,7 +82,8 @@ export default {
       const day = String(currentDate.getDate()).padStart(2, "0");
       this.photo_date = `${year}-${month}-${day}`;
     },
-    PhotoUpload() { // 사용자가 입력한 사진 정보(제목, 코멘트, 사진 url, 날짜)를 PhotoData.js에 저장하는 함수 
+    PhotoUpload() {
+      // 사용자가 입력한 사진 정보(제목, 코멘트, 사진 url, 날짜)를 PhotoData.js에 저장하는 함수
       this.GetDate();
       let NewData = {
         title: this.photo_title,
@@ -77,14 +94,17 @@ export default {
       this.PhotoData.unshift(NewData);
       this.update_key++;
       this.toggleModal();
-      
     },
-    toggleDeleteButton() { 
+    toggleDeleteButton() {
       this.showDeleteButton = !this.showDeleteButton;
     },
     handleDeletePhotoCard(index) {
       // 전달받은 인덱스를 이용하여 PhotoData.js에서 해당 데이터를 삭제합니다.
       this.PhotoData.splice(index, 1);
+    },
+
+    toggleEditMode() {
+      this.showEditButton = !this.showEditButton;
     },
   },
 };
@@ -298,8 +318,8 @@ li {
   margin-left: 50px;
   flex-wrap: wrap; /* 요소들이 Flex 컨테이너 내에서 여러 줄에 걸쳐 자동으로 나열되도록 설정 */
 }
-.home-white-box > *{
-  flex: 0 0 calc(90% /3);
+.home-white-box > * {
+  flex: 0 0 calc(90% / 3);
 }
 .home-imgBox {
   width: 40%;
@@ -314,7 +334,15 @@ li {
   margin-right: -25px;
 }
 .btn-delete-minus:hover {
-  box-shadow: 0px 0px 1px 1px rgb(0,0,0,0.1);
+  box-shadow: 0px 0px 1px 1px rgb(0, 0, 0, 0.1);
+}
+.btn-edit-circle{
+  float: right;
+  margin-top: -48px;
+  margin-right: -25px;
+}
+.btn-delete-minus:hover {
+  box-shadow: 0px 0px 1px 1px rgb(0, 0, 0, 0.1);
 }
 .home-imgBox-img {
   width: 45%;
@@ -462,129 +490,4 @@ textarea {
   opacity: 0.7;
 }
 
-/* Modal window */
-.black-bg {
-  width: 100%;
-  height: 100%;
-  background: rgba(38, 38, 38, 0.9);
-  position: fixed;
-  padding: 20px;
-  z-index: 1000;
-}
-.modal-white-box {
-  position: absolute;
-  vertical-align: middle;
-  left: 14%;
-  right: 0;
-  width: 65%;
-  height: 68%;
-  background: white;
-  padding: 40px;
-  margin-top: 50px;
-  border-radius: 10px;
-}
-.close-btn {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  right: 0;
-  padding: 35px;
-}
-.modal-imgBox-img {
-  width: 100%;
-  height: 75%;
-  background: #efeff0;
-  float: left;
-  margin-top: 25px;
-  border-radius: 20px;
-}
-.modal-content {
-  display: flex;
-  flex-wrap: nowrap;
-  min-height: 100%;
-
-  flex-direction: row;
-  box-sizing: border-box;
-}
-.modal-L {
-  display: flex;
-  flex-direction: column;
-  flex-basis: 35%;
-  align-items: center;
-}
-.modal-R {
-  display: flex;
-  flex-direction: column;
-  flex-basis: 65%;
-}
-#modal-input {
-  width: 500px;
-  height: 50px;
-  font-size: 15px;
-  border: 0;
-  border-bottom: 1.5px solid #d3d3d3;
-  margin-left: 20px;
-}
-#modal-textarea {
-  width: 540px;
-  height: 184px;
-  font-size: 15px;
-  border: 0;
-  background-color: #f5f5f7;
-  border-radius: 10px;
-  padding: 15px 0 0 20px;
-  margin-left: 20px;
-}
-.modal-title {
-  padding: 30px;
-  padding-bottom: 0;
-}
-.modal-comment {
-  padding: 30px;
-  width: 400px;
-}
-.upload-btn {
-  font-size: 19px;
-  font-weight: 700;
-  color: #a3a3a3;
-  cursor: pointer;
-  background-color: transparent;
-  border: 0;
-  text-align: right;
-  margin-top: 5px;
-}
-.upload-btn:hover {
-  color: #1e1e1e;
-  transition: 0.5s;
-}
-.file-btn {
-  padding: 20px;
-  border: 0;
-}
-input[type="file"]::file-selector-button {
-  font-size: 16px;
-  font-weight: 550;
-  background: transparent;
-  border: 0;
-  cursor: pointer;
-}
-/* modal window animation */
-.modal-enter-from {
-  opacity: 0;
-}
-.modal-enter-active {
-  transition: all 0.2s;
-}
-.modal-enter-to {
-  opacity: 1;
-}
-.modal-leave-from {
-  opacity: 1;
-}
-.modal-leave-active {
-  transition: all 0.2s;
-}
-.modal-leave-to {
-  opacity: 0;
-}
 </style>

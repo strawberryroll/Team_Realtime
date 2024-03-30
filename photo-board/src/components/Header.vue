@@ -12,7 +12,7 @@
       <div class="nav-right">
           <router-link to="/"><font-awesome-icon :icon="['fas', 'plus']" style="color: #1e1e1e;" @click="$emit('M_isOpen')" /></router-link>
           <font-awesome-icon :icon="['fas', 'trash-can']" style="color: #1e1e1e;" @click="$emit('show_D_Btn')" />
-          <font-awesome-icon :icon="['fas', 'pen-to-square']" style="color: #1e1e1e;" />
+          <font-awesome-icon :icon="['fas', 'pen-to-square']" style="color: #1e1e1e;" @click="$emit('show_E_Btn')" />
       </div>
     </nav>
   </section>
