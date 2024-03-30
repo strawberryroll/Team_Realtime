@@ -4,8 +4,7 @@
 
   <!-- NAVBAR Header -->
   <Header
-    :M_isOpen="M_isOpen"
-    @M_isOpen="toggleModal"
+    @toggleUploadModal="toggleUploadModal"
     @show_D_Btn="toggleDeleteButton"
     @show_E_Btn="toggleEditMode"
   />
@@ -17,21 +16,22 @@
       :showDeleteButton="showDeleteButton"
       :showEditButton="showEditButton"
       @deletePhotoCard="handleDeletePhotoCard"
-      
+      @toggleEditModal="toggleEditModal"
     >
     </router-view>
   </section>
 
   <!-- Modal Window -->
-  <Modal
-    @M_isOpen="toggleModal"
+  <UploadModal
+    :Upload_isOpen="Upload_isOpen"
+    :photo_url="photo_url"
+    @toggleUploadModal="toggleUploadModal"
     @PhotoSelect="PhotoSelect"
     @PhotoUpload="PhotoUpload"
-    :M_isOpen="M_isOpen"
-    :photo_url="photo_url"
     v-model:photo_title="photo_title"
     v-model:photo_comment="photo_comment"
   />
+  <EditModal :Edit_isOpen="Edit_isOpen" @toggleEditModal="toggleEditModal" />
 </template>
 
 <script>
@@ -39,14 +39,16 @@ import PhotoData from "./PhotoData.js";
 // components
 import Sidebar from "./components/Sidebar.vue";
 import Header from "./components/Header.vue";
-import Modal from "./components/Modal.vue";
+import UploadModal from "./components/UploadModal.vue";
+import EditModal from "./components/EditModal.vue";
 
 export default {
   data() {
     return {
       update_key: 0,
       isOpen: false, // 사이드바 오픈 여부
-      M_isOpen: false, // 모달창 오픈 여부
+      Upload_isOpen: false, // 업로드모달창 오픈 여부
+      Edit_isOpen: false, // 수정모달창 오픈 여부
       user_name: "User_Name",
       photo_url: "", // 업로드 할 사진의 url
       PhotoData: PhotoData, // 업로드 사진에 대한 정보
@@ -54,20 +56,26 @@ export default {
       photo_title: "",
       photo_date: "",
       showDeleteButton: false, // 삭제 버튼 보임 여부
-      showEditButton: true, // 포토카드의 오른쪽 상단에 수정 버튼 보임 여부
+      showEditButton: false, // 포토카드의 오른쪽 상단에 수정 버튼(check icon) 보임 여부
     };
   },
   components: {
     Sidebar,
     Header,
-    Modal,
+    UploadModal,
+    EditModal,
   },
   methods: {
     toggleSidebar() {
       this.isOpen = !this.isOpen;
     },
-    toggleModal() {
-      this.M_isOpen = !this.M_isOpen;
+    toggleUploadModal() {
+      // 업로드 모달창 토글 메소드
+      this.Upload_isOpen = !this.Upload_isOpen;
+    },
+    toggleEditModal() {
+      // 수정 모달창 토글 메소드
+      this.Edit_isOpen = !this.Edit_isOpen;
     },
     PhotoSelect(event) {
       let photo = event.target.files;
@@ -83,7 +91,7 @@ export default {
       this.photo_date = `${year}-${month}-${day}`;
     },
     PhotoUpload() {
-      // 사용자가 입력한 사진 정보(제목, 코멘트, 사진 url, 날짜)를 PhotoData.js에 저장하는 함수
+      // 사용자가 입력한 사진 정보(제목, 코멘트, 사진 url, 날짜)를 PhotoData.js에 저장하는 메소드
       this.GetDate();
       let NewData = {
         title: this.photo_title,
@@ -93,9 +101,12 @@ export default {
       };
       this.PhotoData.unshift(NewData);
       this.update_key++;
-      this.toggleModal();
+      this.toggleUploadModal();
     },
     toggleDeleteButton() {
+      if (this.showEditButton) {
+        this.showEditButton = false;
+      }
       this.showDeleteButton = !this.showDeleteButton;
     },
     handleDeletePhotoCard(index) {
@@ -104,7 +115,15 @@ export default {
     },
 
     toggleEditMode() {
+      if (this.showDeleteButton) {
+        this.showDeleteButton = false;
+      }
       this.showEditButton = !this.showEditButton;
+    },
+    updatePhotoData(index, editedPhotoData) {
+      // 수정된 포토카드의 인덱스와 데이터를 PhotoCard->Home->App 순으로 받아온 후 업데이트하는 메소드
+      // spread 연산자 이용하여 이전에 저장된 포토카드의 데이터를 수정된 데이터로 업데이트
+      this.PhotoData[index] = { ...editedPhotoData };
     },
   },
 };
@@ -336,12 +355,12 @@ li {
 .btn-delete-minus:hover {
   box-shadow: 0px 0px 1px 1px rgb(0, 0, 0, 0.1);
 }
-.btn-edit-circle{
+.btn-edit-circle {
   float: right;
   margin-top: -48px;
   margin-right: -25px;
 }
-.btn-delete-minus:hover {
+.btn-edit-circle:hover {
   box-shadow: 0px 0px 1px 1px rgb(0, 0, 0, 0.1);
 }
 .home-imgBox-img {
@@ -489,5 +508,4 @@ textarea {
 .myprofile-btn:hover {
   opacity: 0.7;
 }
-
 </style>

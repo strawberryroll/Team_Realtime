@@ -1,9 +1,9 @@
 <template>
   <Transition name="modal">
-    <div class="black-bg" v-if="M_isOpen == true">
+    <div class="black-bg" v-if="Upload_isOpen == true">
       <div class="modal-white-box">
         <!-- modal header -->
-        <div class="close-btn" @click="$emit('M_isOpen')">
+        <div class="close-btn" @click="$emit('toggleUploadModal')">
           <font-awesome-icon
             :icon="['fas', 'x']"
             size="xl"
@@ -68,7 +68,7 @@
 <script>
 export default {
   props: {
-    M_isOpen: Boolean,
+    Upload_isOpen: Boolean,
     photo_url: String,
     photo_title: String,
     photo_comment: String,
