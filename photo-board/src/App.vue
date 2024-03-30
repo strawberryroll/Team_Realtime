@@ -11,67 +11,12 @@
   </section>
 
   <!-- Modal Window -->
-  <Transition name="modal">
-    <div class="black-bg" v-if="M_isOpen == true">
-      <div class="modal-white-box">
-        <!-- modal header -->
-        <div class="close-btn" @click="toggleModal">
-          <font-awesome-icon
-            :icon="['fas', 'x']"
-            size="xl"
-            style="color: #1e1e1e"
-          />
-        </div>
-        <div id="title" class="box-title"><p>UPLOAD</p></div>
-        <div class="division-line"></div>
-        <!-- modal content-->
-        <div class="modal-content">
-          <!--Left part-->
-          <div class="modal-L">
-            <!--photo preview-->
-            <div v-if="photo_url" class="modal-imgBox-img center-align">
-              <img :src="photo_url" style="width: 100%; height: auto" />
-            </div>
-            <div v-else class="modal-imgBox-img center-align">
-              <font-awesome-icon
-                :icon="['fas', 'image']"
-                style="color: #c4c4c4; font-size: 4em"
-              />
-            </div>
-            <!--/photo preview-->
-            <input
-              type="file"
-              accept="image/*"
-              class="file-btn"
-              @change="PhotoSelect"
-            />
-          </div>
-          <!--Right part-->
-          <div class="modal-R">
-            <div class="modal-title">
-              <p>Title</p>
-              <input
-                v-model="photo_title"
-                type="text"
-                placeholder="제목을 입력하세요"
-                id="modal-input"
-              />
-            </div>
-            <div class="modal-comment">
-              <p>Comment</p>
-              <textarea
-                v-model="photo_comment"
-                placeholder="사진 설명을 입력하세요"
-                id="modal-textarea"
-              ></textarea>
-            </div>
-            <button class="upload-btn" @click="PhotoUpload">UPLOAD</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </Transition>
-  <!-- /Modal Window -->
+  <Modal 
+  @M_isOpen="toggleModal" @PhotoSelect="PhotoSelect" @PhotoUpload="PhotoUpload"
+  :M_isOpen="M_isOpen" :photo_url="photo_url" 
+  v-model:photo_title="photo_title" v-model:photo_comment="photo_comment"
+  />
+
 </template>
 
 <script>
@@ -79,6 +24,7 @@ import PhotoData from "./PhotoData.js";
 // components
 import Sidebar from "./components/Sidebar.vue";
 import Header from "./components/Header.vue";
+import Modal from "./components/Modal.vue";
 
 export default {
   data() {
@@ -98,6 +44,7 @@ export default {
   components: {
     Sidebar,
     Header,
+    Modal,
   },
   methods: {
     toggleSidebar() {
@@ -106,8 +53,8 @@ export default {
     toggleModal() {
       this.M_isOpen = !this.M_isOpen;
     },
-    PhotoSelect(e) {
-      let photo = e.target.files;
+    PhotoSelect(event) {
+      let photo =event.target.files;
       let url = URL.createObjectURL(photo[0]);
       console.log(url);
       this.photo_url = url;
@@ -119,7 +66,7 @@ export default {
       const day = String(currentDate.getDate()).padStart(2, "0");
       this.photo_date = `${year}-${month}-${day}`;
     },
-    PhotoUpload() { // 사용자가 입력한 사진 정보를 PhotoData.js에 저장하는 함수 
+    PhotoUpload() { // 사용자가 입력한 사진 정보(제목, 코멘트, 사진 url, 날짜)를 PhotoData.js에 저장하는 함수 
       this.GetDate();
       let NewData = {
         title: this.photo_title,

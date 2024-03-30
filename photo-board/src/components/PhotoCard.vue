@@ -37,8 +37,8 @@ export default {
   },
   methods: {
     deletePhotoCard() { // 삭제버튼(btn-minus)을 눌렀을 때 해당 PhotoCard의 index가 deletePhotoCard 메서드를 통해 Home.vue로 전달되며, PhotoCard를 화면에서 안보이게 한다.
-      this.$emit('deletePhotoCard', this.index); // 삭제 이벤트를 상위 컴포넌트(Home.vue)로 전달
-      this.PhotoData.deleted = true; // PhotoData 객체의 deleted 속성을 true로 설정하여 삭제된 것으로 표시
+      this.$emit('deletePhotoCard', this.index, this.PhotoData); // 삭제 이벤트를 상위 컴포넌트(Home.vue)로 전달
+      //this.PhotoData.deleted = true; // PhotoData 객체의 deleted 속성을 true로 설정하여 삭제된 것으로 표시. 코드 실행에 오류가 있어서 주석 처리 및 위 40번째 코드로 옮김
       this.isVisible = false; // 화면에서 안보이게 함
     }
   }
