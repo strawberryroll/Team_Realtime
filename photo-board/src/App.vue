@@ -30,6 +30,7 @@
     @PhotoUpload="PhotoUpload"
     v-model:photo_title="photo_title"
     v-model:photo_comment="photo_comment"
+    v-model:photo_url="photo_url"
   />
   <EditModal
     :Edit_isOpen="Edit_isOpen"
@@ -124,6 +125,9 @@ export default {
     handleDeletePhotoCard(index) {
       // 전달받은 인덱스를 이용하여 PhotoData.js에서 해당 데이터를 삭제합니다.
       this.PhotoData.splice(index, 1);
+      
+       // 키를 업데이트하여 변경사항 새로고침
+      this.update_key++;
     },
 
    toggleEditMode() {

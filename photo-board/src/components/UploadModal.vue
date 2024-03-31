@@ -32,6 +32,7 @@
               accept="image/*"
               class="file-btn"
               @change="$emit('PhotoSelect', $event)"
+              
             />
           </div>
           <!--Right part-->
@@ -72,6 +73,16 @@ export default {
     photo_url: String,
     photo_title: String,
     photo_comment: String,
+  },
+  watch:{ 
+    // 업로드 모달창 열리고 닫힘 감시 - 모달창 닫혔을 때 입력 데이터 초기화
+    Upload_isOpen(val){
+      if (!val) {
+        this.$emit('update:photo_title', ''); // 제목 초기화
+        this.$emit('update:photo_comment', ''); // 코멘트 초기화
+        this.$emit('update:photo_url', ''); // 미리보기 사진 초기화
+      }
+    }
   },
 };
 </script>
