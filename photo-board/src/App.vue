@@ -31,7 +31,15 @@
     v-model:photo_title="photo_title"
     v-model:photo_comment="photo_comment"
   />
-  <EditModal :Edit_isOpen="Edit_isOpen" @toggleEditModal="toggleEditModal" />
+  <EditModal
+    :Edit_isOpen="Edit_isOpen"
+    :editedPhotoData="editedPhotoData"
+    @toggleEditModal="toggleEditModal"
+    @PhotoSelect="PhotoSelect"
+    @updatePhotoData="updatePhotoData"
+    v-model:title="editedPhotoData.title"
+    v-model:comment="editedPhotoData.comment"
+  />
 </template>
 
 <script>
@@ -48,7 +56,6 @@ export default {
       update_key: 0,
       isOpen: false, // 사이드바 오픈 여부
       Upload_isOpen: false, // 업로드모달창 오픈 여부
-      Edit_isOpen: false, // 수정모달창 오픈 여부
       user_name: "User_Name",
       photo_url: "", // 업로드 할 사진의 url
       PhotoData: PhotoData, // 업로드 사진에 대한 정보
@@ -56,7 +63,10 @@ export default {
       photo_title: "",
       photo_date: "",
       showDeleteButton: false, // 삭제 버튼 보임 여부
+      Edit_isOpen: false, // 수정모달창 오픈 여부
       showEditButton: false, // 포토카드의 오른쪽 상단에 수정 버튼(check icon) 보임 여부
+      editedPhotoData: {}, // 수정된 포토카드 정보를 저장할 변수
+      selectedIndex: -1, // 수정할 포토카드의 인덱스
     };
   },
   components: {
@@ -70,38 +80,40 @@ export default {
       this.isOpen = !this.isOpen;
     },
     toggleUploadModal() {
-      // 업로드 모달창 토글 메소드
       this.Upload_isOpen = !this.Upload_isOpen;
     },
-    toggleEditModal() {
-      // 수정 모달창 토글 메소드
-      this.Edit_isOpen = !this.Edit_isOpen;
-    },
-    PhotoSelect(event) {
+     
+    PhotoSelect(event) { // 선택한 사진파일의 URL을 생성하는 메소드
       let photo = event.target.files;
       let url = URL.createObjectURL(photo[0]);
-      console.log(url);
+
+      this.editedPhotoData.url = url;
       this.photo_url = url;
     },
-    GetDate() {
+    GetDate() { // 현재 날짜를 yyyy-mm-dd 형식으로 저장하는 메소드
       const currentDate = new Date();
       const year = currentDate.getFullYear();
       const month = String(currentDate.getMonth() + 1).padStart(2, "0"); // 월은 0부터 시작하므로 +1 해줌
       const day = String(currentDate.getDate()).padStart(2, "0");
       this.photo_date = `${year}-${month}-${day}`;
     },
-    PhotoUpload() {
-      // 사용자가 입력한 사진 정보(제목, 코멘트, 사진 url, 날짜)를 PhotoData.js에 저장하는 메소드
+    PhotoUpload() { // 사용자가 입력한 사진 정보(제목, 코멘트, 사진 url, 날짜)를 PhotoData.js에 '새로' 저장하는 메소드
       this.GetDate();
+      // 새로운 사진 데이터 저장할 NewData 객체 생성
       let NewData = {
         title: this.photo_title,
         comment: this.photo_comment,
         url: this.photo_url,
         date: this.photo_date,
       };
+      // PhotoData 배열 맨 앞에 새 데이터(NewData) 추가
       this.PhotoData.unshift(NewData);
+
+      // 키를 업데이트하여 변경사항 새로고침
       this.update_key++;
-      this.toggleUploadModal();
+
+      // 업로드 모달창 닫음
+      this.toggleUploadModal(); 
     },
     toggleDeleteButton() {
       if (this.showEditButton) {
@@ -114,16 +126,46 @@ export default {
       this.PhotoData.splice(index, 1);
     },
 
-    toggleEditMode() {
+   toggleEditMode() {
       if (this.showDeleteButton) {
         this.showDeleteButton = false;
       }
       this.showEditButton = !this.showEditButton;
     },
-    updatePhotoData(index, editedPhotoData) {
-      // 수정된 포토카드의 인덱스와 데이터를 PhotoCard->Home->App 순으로 받아온 후 업데이트하는 메소드
-      // spread 연산자 이용하여 이전에 저장된 포토카드의 데이터를 수정된 데이터로 업데이트
-      this.PhotoData[index] = { ...editedPhotoData };
+    toggleEditModal(index) { 
+      // 수정 모달창 토글
+      this.Edit_isOpen = !this.Edit_isOpen; 
+      
+      // 컴포넌트 PhotoCard->Home->App순으로 수정할 포토카드의 인덱스 가지고 옴
+      // 인덱스에 해당하는 포토 데이터를 editedPhotoData에 저장
+      if (this.Edit_isOpen) {
+        this.editedPhotoData = { ...this.PhotoData[index] };
+
+        // 수정할 포토카드의 인덱스를 selectedIndex에 저장 - 포토카드 데이터 업데이트 시 사용
+        this.selectedIndex = index;
+      }
+    },
+    updatePhotoData() { // EditModal로부터 수정된 포토카드 데이터를 받아와 업데이트 하는 메소드
+      this.GetDate(); 
+      // 수정된 데이터 저장할 EditData 객체 생성
+      let EditData = {
+        title: this.editedPhotoData.title,
+        comment: this.editedPhotoData.comment,
+        url: this.editedPhotoData.url,
+        date: this.photo_date, // 포토카드의 날짜, 수정한 날짜로 변경
+      };
+      // 스프레드 연산자 이용해 수정된 포토카드 데이터 업데이트. 이때 selectedIndex는 수정된 포토카드의 인덱스
+      this.PhotoData[this.selectedIndex] = { ...EditData };
+
+      // 콘솔을 통해 데이터 업데이트 여부 확인 - 추후 삭제예정
+      console.log(this.PhotoData[this.selectedIndex]);
+      console.log(PhotoData);
+
+      // 키를 업데이트하여 변경사항 새로고침
+      this.update_key++;
+
+      // 수정 모달창 닫음
+      this.toggleEditModal();
     },
   },
 };

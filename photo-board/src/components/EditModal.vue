@@ -17,8 +17,14 @@
           <!--Left part-->
           <div class="modal-L">
             <!--photo preview-->
-            <div v-if="photo_url" class="modal-imgBox-img center-align">
-              <img :src="photo_url" style="width: 100%; height: auto" />
+            <div
+              v-if="editedPhotoData.url"
+              class="modal-imgBox-img center-align"
+            >
+              <img
+                :src="editedPhotoData.url"
+                style="width: 100%; height: auto"
+              />
             </div>
             <div v-else class="modal-imgBox-img center-align">
               <font-awesome-icon
@@ -31,7 +37,7 @@
               type="file"
               accept="image/*"
               class="file-btn"
-              @change="$emit('PhotoSelect', $event)"
+              @change="$emit('PhotoSelect',$event)"
             />
           </div>
           <!--Right part-->
@@ -39,23 +45,25 @@
             <div class="modal-title">
               <p>Title</p>
               <input
-                :value="photo_title"
-                @input="$emit('update:photo_title', $event.target.value)"
+                :value="editedPhotoData.title"
+                @input="
+                  $emit('update:title', $event.target.value)
+                "
                 type="text"
-                placeholder="제목을 입력하세요"
                 id="modal-input"
               />
             </div>
             <div class="modal-comment">
               <p>Comment</p>
               <textarea
-                :value="photo_comment"
-                @input="$emit('update:photo_comment', $event.target.value)"
-                placeholder="내용을 입력하세요"
+                :value="editedPhotoData.comment"
+                @input="
+                  $emit('update:comment', $event.target.value)
+                "
                 id="modal-textarea"
               ></textarea>
             </div>
-            <button class="upload-btn" @click="$emit('PhotoUpload')">
+            <button class="upload-btn" @click="updatePhotoData">
               SAVE
             </button>
           </div>
@@ -67,12 +75,17 @@
 
 <script>
 export default {
-    props:{
-        Edit_isOpen:Boolean,
-    }
-}
+  props: {
+    Edit_isOpen: Boolean,
+    editedPhotoData: Object,
+  },
+  methods: {
+    updatePhotoData() { // editedPhotoData를 App.vue로 전달
+      this.$emit('updatePhotoData',this.editedPhotoData);
+    },
+  },
+};
 </script>
 
 <style>
-
 </style>

@@ -73,7 +73,6 @@ export default {
     photo_title: String,
     photo_comment: String,
   },
-  methods: {},
 };
 </script>
 

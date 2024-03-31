@@ -18,7 +18,7 @@
         style="color: #b8b8b8"
         size="2xl"
         class="btn-edit-circle"
-        @click="$emit('toggleEditModal')"
+        @click="toggleEditModal"
       />
       <p class="margin-0 font-20 font-bold" style="color: #1e1e1e">
         {{ PhotoData.title }}
@@ -52,7 +52,10 @@ export default {
       //this.PhotoData.deleted = true; // PhotoData 객체의 deleted 속성을 true로 설정하여 삭제된 것으로 표시. 코드 실행에 오류가 있어서 주석 처리 및 위 40번째 코드로 옮김
       this.isVisible = false; // 화면에서 안보이게 함
     },
-
+    toggleEditModal() {
+      // btn-edit-circle 클릭 시 선택된 포토카드의 인덱스를 PhotoCard->Home->App순으로 전달
+      this.$emit("toggleEditModal", this.index);
+    },
   },
 };
 </script>

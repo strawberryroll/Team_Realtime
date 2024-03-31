@@ -40,9 +40,9 @@ export default {
       // PhotoCard.vue에서 전달받은 index 데이터를 App.vue에 전달한다.
       this.$emit("deletePhotoCard", index);
     },
-    toggleEditModal() {
-      // 수정 모달창을 열고 닫는 메소드를 app.vue로 전달
-      this.$emit("toggleEditModal");
+    toggleEditModal(index) {
+      // 수정하기 위해 선택된 포토카드의 인덱스를 PhotoCard->Home->App순으로 전달
+      this.$emit("toggleEditModal",index);
     },
   },
 };
